@@ -18,9 +18,10 @@ import {
 import PatientInput from "./PatientInput";
 import DiagnosticResults from "./DiagnosticResults";
 import SatelliteStatus from "./SatelliteStatus";
+import PatientHistory from "./PatientHistory";
 
 const MedicalDashboard = () => {
-  const [currentStep, setCurrentStep] = useState<'overview' | 'input' | 'processing' | 'results'>('overview');
+  const [currentStep, setCurrentStep] = useState<'overview' | 'input' | 'processing' | 'results' | 'history'>('overview');
   const [patientData, setPatientData] = useState(null);
 
   const handlePatientSubmit = (data: any) => {
@@ -92,6 +93,10 @@ const MedicalDashboard = () => {
 
   if (currentStep === 'results') {
     return <DiagnosticResults patientData={patientData} onBack={() => setCurrentStep('overview')} />;
+  }
+
+  if (currentStep === 'history') {
+    return <PatientHistory onBack={() => setCurrentStep('overview')} />;
   }
 
   return (
@@ -187,7 +192,7 @@ const MedicalDashboard = () => {
                 >
                   Start Assessment
                 </Button>
-                <Button variant="outline">View History</Button>
+                <Button variant="outline" onClick={() => setCurrentStep('history')}>View History</Button>
               </div>
             </CardContent>
           </Card>

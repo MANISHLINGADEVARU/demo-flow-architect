@@ -16,6 +16,7 @@ import {
   Eye
 } from "lucide-react";
 import { analyzePatient, type PatientData } from "@/utils/diagnosticEngine";
+import { generateMedicalReportPDF } from "@/utils/pdfGenerator";
 
 interface DiagnosticResultsProps {
   patientData: PatientData;
@@ -25,6 +26,15 @@ interface DiagnosticResultsProps {
 const DiagnosticResults = ({ patientData, onBack }: DiagnosticResultsProps) => {
   // Real AI analysis based on patient data
   const diagnosticResults = analyzePatient(patientData);
+
+  const handleExportReport = () => {
+    try {
+      generateMedicalReportPDF(patientData, diagnosticResults);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF report. Please try again.');
+    }
+  };
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
@@ -61,7 +71,7 @@ const DiagnosticResults = ({ patientData, onBack }: DiagnosticResultsProps) => {
             </div>
           </div>
           <div className="flex space-x-2">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={handleExportReport}>
               <Download className="h-4 w-4 mr-2" />
               Export Report
             </Button>
