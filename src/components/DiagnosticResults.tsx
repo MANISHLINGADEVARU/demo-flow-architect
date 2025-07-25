@@ -15,47 +15,16 @@ import {
   Download,
   Eye
 } from "lucide-react";
+import { analyzePatient, type PatientData } from "@/utils/diagnosticEngine";
 
 interface DiagnosticResultsProps {
-  patientData: any;
+  patientData: PatientData;
   onBack: () => void;
 }
 
 const DiagnosticResults = ({ patientData, onBack }: DiagnosticResultsProps) => {
-  // Simulated AI analysis results
-  const diagnosticResults = {
-    primaryDiagnosis: "Acute Coronary Syndrome (Suspected)",
-    confidence: 87,
-    riskLevel: "HIGH",
-    triageCategory: "PRIORITY 1",
-    recommendations: [
-      "Immediate cardiac monitoring",
-      "12-lead ECG within 10 minutes",
-      "Administer aspirin 325mg if no contraindications",
-      "Establish IV access",
-      "Prepare for emergency cardiac catheterization"
-    ],
-    vitalsAnalysis: {
-      heartRate: { value: 110, status: "elevated", normal: "60-100 bpm" },
-      bloodPressure: { value: "150/95", status: "elevated", normal: "120/80 mmHg" },
-      temperature: { value: 37.2, status: "normal", normal: "36.1-37.2°C" },
-      oxygenSaturation: { value: 96, status: "low-normal", normal: "95-100%" }
-    },
-    differentialDiagnoses: [
-      { condition: "Myocardial Infarction", probability: 65 },
-      { condition: "Unstable Angina", probability: 22 },
-      { condition: "Aortic Dissection", probability: 8 },
-      { condition: "Pulmonary Embolism", probability: 5 }
-    ],
-    nextSteps: {
-      immediateActions: [
-        "Contact emergency medical team",
-        "Initiate cardiac protocol",
-        "Continuous monitoring"
-      ],
-      timeframe: "< 15 minutes"
-    }
-  };
+  // Real AI analysis based on patient data
+  const diagnosticResults = analyzePatient(patientData);
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
