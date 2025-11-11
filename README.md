@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/b8027a3f-e368-415d-80cf-a591567f0105
+**URL**: https://aethermed-medsat-ai-triage-system.vercel.app/
 
 ## How can I edit this code?
 
